@@ -1,3 +1,5 @@
+require 'helpers'
+
 git :init
 
 run "echo 'TODO add readme content' > README"

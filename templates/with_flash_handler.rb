@@ -1,5 +1,5 @@
 file 'app/controllers/flash_base_controller.rb', <<-FLASH
-class FlashController < ApplicationController
+class FlashBaseController < ApplicationController
 
   before_filter :authenticate
   before_filter :init_state
@@ -132,7 +132,7 @@ class FlashController < ApplicationController
       output_file.puts('')
       output_file.close
 
-      throw Exception.new("Cheating? Нехорошо!")
+      throw Exception.new("Cheating? Not good!")
     end
 
     # check my request signature
@@ -165,7 +165,7 @@ class FlashController < ApplicationController
       output_file.puts('')
       output_file.close
 
-      throw Exception.new("Cheating? Нехорошо! Плохой мальчик!")
+      throw Exception.new("Cheating? Bad boy!")
     end
   end
 
@@ -261,7 +261,7 @@ class VkUser
 end
 VKU
 
-puts "Don't forget to check identity of VkUser"
+puts red("Don't forget to check identity of VkUser")
 
 prod_app_id = ask("What's your production APP ID?")
 staging_app_id = ask("What's your testing APP ID (press ENTER to skip)")
