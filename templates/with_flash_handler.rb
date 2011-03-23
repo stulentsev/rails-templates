@@ -271,7 +271,7 @@ apps = staging_app_id.empty? ? [prod_app_id] : [prod_app_id, staging_app_id]
 lib 'vk_api.rb', <<-VKAPI
 class VkApi
 
-  API_ID = #{apps}
+  API_ID = #{apps.inspect}
   API_SECRET = {}
   SECRET_API_SECRET = {}
 

@@ -4,13 +4,18 @@ run "echo 'TODO add readme content' > README"
 run "touch tmp/.gitignore log/.gitignore vendor/.gitignore"
 run "cp config/database.yml config/example_database.yml"
 run "rm public/index.html"
+run <<-FFF
+echo "source 'http://rubygems.org'
+
+" > Gemfile
+FFF
+
 
 new_ignores =  <<-END
 config/database.yml
 END
 
 run "echo '#{new_ignores}' >> .gitignore"
-
 
 file 'app/views/layouts/void.erb', '<%= yield %>'
 
