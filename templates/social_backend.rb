@@ -21,6 +21,7 @@ gem 'devise'
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/heartbeatable.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/newrelicable.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_flash_builder.rb"
 
 run 'bundle install'
 

@@ -11,7 +11,7 @@ class PulseController < ActionController::Base
     begin
       # just get some small object from the DB
       User.first
-      render :text => "<html><body>OK  #{Time.now.utc.to_s(:db)}</body></html>"
+      render :text => "<html><body>OK  \#{Time.now.utc.to_s(:db)}</body></html>"
     rescue Exception => ex
       render :text => '<html><body>ERROR</body></html>', :status => :internal_server_error
     end
