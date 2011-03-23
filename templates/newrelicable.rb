@@ -1,5 +1,5 @@
 
-license_key = ask('Please provide your NewRelic license key: ')
+license_key = ask('Please provide your NewRelic license key (press ENTER to skip): ')
 
 if license_key && license_key.gsub(/\s/, '').length > 0
   gem 'rpm_contrib', :git => "git://github.com/newrelic/rpm_contrib.git"
