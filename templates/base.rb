@@ -16,6 +16,7 @@ file ".gitignore", <<-END
 log/*.log
 tmp/**/*
 config/database.yml
+config/mongoid.yml
 db/*.sqlite3
 END
 

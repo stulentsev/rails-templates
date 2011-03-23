@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="RUBY_MODULE" version="4">
+  <component name="GemRequirementsHolder" version="3">
+    <requirement>
+      <requirement>
+        <dependency name="bson_ext" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="devise" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="mongoid" version="2.0.0.rc.8" bound="EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="newrelic_rpm" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/newrelicable.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="rpm_contrib" version="0" bound="GREATER_OR_EQUAL" git="true" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/newrelicable.rb" />
+    </requirement>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
