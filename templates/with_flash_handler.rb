@@ -113,8 +113,8 @@ class FlashController < ApplicationController
   def authenticate
     return if Rails.env == 'development'
 
-    viewer_id       = params[:viewer_id] #.to_s.gsub("\r\n", '')
-    sent_auth_key   = params[:auth_key] #.to_s.gsub("\r\n", '')
+    viewer_id       = params[:viewer_id] #.to_s.gsub("\\r\\n", '')
+    sent_auth_key   = params[:auth_key] #.to_s.gsub("\\r\\n", '')
 #    mode = params[:test_mode] ? :test : :production
     api_id          = params[:api_id]
 
@@ -387,13 +387,13 @@ class VkApi
         rate = (processed == 0 || elapsed == 0) ? 0 : processed / elapsed
         rate2 = (processed == 0 || elapsed == 0) ? 0 : actual_sent / elapsed
 
-        print "\rMessage is sent to (\#{actual_sent} | \#{last_id}, \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
+        print "\\rMessage is sent to (\#{actual_sent} | \#{last_id}, \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
         STDOUT.flush
 #          sleep(0.1)
       end
 
     end
-    puts "\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
+    puts "\\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
     puts ""
   end
 
