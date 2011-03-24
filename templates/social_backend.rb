@@ -10,6 +10,12 @@ def green(text)
   colorize(text, "\033[32m")
 end
 
+def download_file from, to
+  write_out = open(to, 'wb')
+  write_out.write(open(from).read)
+  write_out.close
+end
+
 
 git :init
 
