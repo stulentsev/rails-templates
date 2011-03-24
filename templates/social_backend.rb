@@ -1,4 +1,15 @@
-require 'helpers'
+def colorize(text, color_code)
+  "#{color_code}#{text}\033[0m"
+end
+
+def red(text)
+  colorize(text, "\033[31m")
+end
+
+def green(text)
+  colorize(text, "\033[32m")
+end
+
 
 git :init
 
@@ -13,7 +24,7 @@ echo "source 'http://rubygems.org'
 FFF
 
 
-new_ignores =  <<-END
+new_ignores = <<-END
 config/database.yml
 END
 
@@ -29,6 +40,7 @@ apply "https://github.com/stulentsev/rails-templates/raw/master/templates/heartb
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/newrelicable.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_flash_handler.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_dashboard.rb"
 
 run 'bundle install'
 
