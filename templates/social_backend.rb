@@ -57,6 +57,7 @@ gem 'mongoid', '2.0.0.rc.8'
 #gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'devise'
 gem 'jquery-rails', '>= 0.2.6'
+gem 'starling'
 
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_heartbeat.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"

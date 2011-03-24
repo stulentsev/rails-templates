@@ -43,6 +43,12 @@
       </requirement>
       <source from="templates/with_newrelic.rb" />
     </requirement>
+    <requirement>
+      <requirement>
+        <dependency name="starling" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
