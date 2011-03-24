@@ -11,7 +11,7 @@ require 'lib/utils.rb'
 
 SN_API = VkApi
 
-#QUEUE = MemCache.new('local_starling_server:22122')
+QUEUE = MemCache.new('local_starling_server:22122')
 
 #REQUEST_CACHE = []
 #50.times do |num|

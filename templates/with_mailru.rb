@@ -153,21 +153,24 @@ class MailruApi
   def self.perform_mass_mailing msg, first_n = nil, start_from = nil
 
     total_start = Time.now
-    offset = start_from || 0
-    page_size = 40_000
+    page_size = 5_000
 
     processed = 0
     actual_sent = 0
     total_count = 0
 
+    last_id = start_from || 1
+
     shard_start = Time.now
     loop do
       break unless !first_n || (first_n && processed <= first_n)
 
-#      ids = VkUser.where(:is_app_user => 1).only(:_id).asc(:_id).skip(offset).limit(page_size).map(&:id)
-      ids = VkUser.only(:_id).asc(:_id).skip(offset).limit(page_size).map(&:id)
+#      ids = VkUser.where(:is_app_user => 1).only(:_id).where(:_id => {'$gt' => last_id}).asc(:_id).limit(page_size).map(&:id)
+      ids = VkUser.only(:_id).where(:_id => {'$gt' => last_id}).asc(:_id).limit(page_size).map(&:id)
 
-      break unless ids.length > 0
+
+      break unless last_id != nil
+
       total_count += ids.length
 
       chunk_length = 100
@@ -175,7 +178,19 @@ class MailruApi
       (ids.length.to_f / chunk_length).ceil.times do |chunk_num|
         part = ids.slice(chunk_num * chunk_length, chunk_length)
 
-        actual_sent_arr = MailruApi.send_notifications(msg, part)
+        begin
+          begin
+            actual_sent_arr = send_notifications(msg, part)
+          rescue Exception => ex
+            win1251 = Iconv.new('utf-8', "windows-1251")
+            err = win1251.iconv(ex.message)
+            puts ''
+            puts err
+            puts ''
+            sleep(1)
+          end
+        end while actual_sent_arr.nil?
+
         QUEUE[UPDATE_APP_USER_QUEUE] = actual_sent_arr
         actual_sent += actual_sent_arr.length
         processed += part.length
@@ -184,17 +199,15 @@ class MailruApi
         rate = (processed == 0 || elapsed == 0) ? 0 : processed / elapsed
         rate2 = (processed == 0 || elapsed == 0) ? 0 : actual_sent / elapsed
 
-        print "\rMessage is sent to (\#{actual_sent} | \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
+        print "\\rMessage is sent to (\#{actual_sent} | \#{last_id}, \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
         STDOUT.flush
 #          sleep(0.1)
       end
-
-      offset += page_size
+      last_id = ids.last
 
     end
-    puts "\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
+    puts "\\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
     puts ""
-
   end
 
   def self.send_notifications msg, *vk_ids
