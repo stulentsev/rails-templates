@@ -15,7 +15,7 @@ git :init
 
 run "echo 'TODO add readme content' > README"
 run "touch tmp/.gitignore log/.gitignore vendor/.gitignore"
-run "cp config/database.yml config/example_database.yml"
+run "mv config/database.yml config/example_database.yml"
 run "rm public/index.html"
 run <<-FFF
 echo "source 'http://rubygems.org'
@@ -32,6 +32,8 @@ run "echo '#{new_ignores}' >> .gitignore"
 
 file 'app/views/layouts/void.erb', '<%= yield %>'
 
+gem 'rails', '3.0.5'
+
 gem 'bson_ext'
 gem 'mongoid', '2.0.0.rc.8'
 gem 'devise'
@@ -41,6 +43,7 @@ apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_m
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/newrelicable.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_flash_handler.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_dashboard.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_configuration.rb"
 
 run 'bundle install'
 

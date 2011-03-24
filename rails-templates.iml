@@ -27,6 +27,12 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="rails" version="3.0.5" bound="EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="rpm_contrib" version="0" bound="GREATER_OR_EQUAL" git="true" path="false" doRequire="true" />
       </requirement>
       <source from="templates/newrelicable.rb" />
