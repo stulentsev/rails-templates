@@ -29,7 +29,7 @@
       <requirement>
         <dependency name="newrelic_rpm" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
-      <source from="templates/newrelicable.rb" />
+      <source from="templates/with_newrelic.rb" />
     </requirement>
     <requirement>
       <requirement>
@@ -41,7 +41,7 @@
       <requirement>
         <dependency name="rpm_contrib" version="0" bound="GREATER_OR_EQUAL" git="true" path="false" doRequire="true" />
       </requirement>
-      <source from="templates/newrelicable.rb" />
+      <source from="templates/with_newrelic.rb" />
     </requirement>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">

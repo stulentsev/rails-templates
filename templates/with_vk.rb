@@ -102,7 +102,6 @@ class VkApi
 #      ids = VkUser.where(:is_app_user => 1).only(:_id).where(:_id => {'$gt' => last_id}).asc(:_id).limit(page_size).map(&:id)
       ids = VkUser.only(:_id).where(:_id => {'$gt' => last_id}).asc(:_id).limit(page_size).map(&:id)
 
-      last_id = ids.last
 
       break unless last_id != nil
 
@@ -113,7 +112,19 @@ class VkApi
       (ids.length.to_f / chunk_length).ceil.times do |chunk_num|
         part = ids.slice(chunk_num * chunk_length, chunk_length)
 
-        actual_sent_arr = VkApi.send_notifications(msg, part)
+        begin
+          begin
+            actual_sent_arr = VkApi.send_notifications(msg, part)
+          rescue Exception => ex
+            win1251 = Iconv.new('utf-8', "windows-1251")
+            err = win1251.iconv(ex.message)
+            puts ''
+            puts err
+            puts ''
+            sleep(1)
+          end
+        end while actual_sent_arr.nil?
+
         QUEUE[UPDATE_APP_USER_QUEUE] = actual_sent_arr
         actual_sent += actual_sent_arr.length
         processed += part.length
@@ -122,13 +133,14 @@ class VkApi
         rate = (processed == 0 || elapsed == 0) ? 0 : processed / elapsed
         rate2 = (processed == 0 || elapsed == 0) ? 0 : actual_sent / elapsed
 
-        print "\\rMessage is sent to (\#{actual_sent} | \#{last_id}, \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
+        print "\rMessage is sent to (\#{actual_sent} | \#{last_id}, \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
         STDOUT.flush
 #          sleep(0.1)
       end
+      last_id = ids.last
 
     end
-    puts "\\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
+    puts "\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
     puts ""
   end
 
@@ -293,10 +305,9 @@ end
 MMCONTROLLER
 
 route <<-RT
-  resources :flash do
-    collection do
-      post  :send_friends
-    end
+resources :flash do
+  collection do
+    post  :send_friends
   end
-
+end
 RT

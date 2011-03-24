@@ -17,7 +17,6 @@ def download_file from, to
   write_out.close
 end
 
-
 git :init
 
 run "echo 'TODO add readme content' > README"
@@ -66,6 +65,7 @@ apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_f
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_dashboard.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_configuration.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_styles.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_vk.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mailru.rb"
 
 run 'bundle install'

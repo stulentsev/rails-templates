@@ -1,5 +1,8 @@
 
-mm_app_id = ask("What's your Mailru APP ID?  ")
+prod_app_id = ask("What's your Mailru APP ID?  ")
+staging_app_id = ask("What's your Mailru testing APP ID (press ENTER to skip)?  ")
+
+apps = staging_app_id.empty? ? [prod_app_id] : [prod_app_id, staging_app_id]
 
 if mm_app_id.length > 0
 
@@ -12,7 +15,7 @@ if mm_app_id.length > 0
 
 
     def wrapper
-      @swfurl = "http://cdn7.appsmail.ru/hosting/#{mm_app_id}/preloader_mm.swf"
+      @swfurl = "http://cdn7.appsmail.ru/hosting/#{prod_app_id}/preloader_mm.swf"
 
       @flashvars_js = ''
       params.each do |k, v|
@@ -109,12 +112,171 @@ if mm_app_id.length > 0
   WRAPPER
 end
 
-route <<-RT
-  resources :mm do
-    collection do
-      post  :send_friends
+lib 'mailru_api.rb', <<-MMAPI
+require 'uri'
+
+class MailruApi
+
+  API_ID = #{apps.inspect}
+  API_SECRET = {}
+  SECRET_API_SECRET = {}
+
+  @@api_id = nil
+
+  def self.api_secret aid
+    aid = aid.to_s
+    return '' unless API_ID.member?(aid)
+
+    val = API_SECRET[aid]
+    unless val
+      get_app_config aid
+      val = api_secret aid
     end
+    @@api_id = aid
+    val
   end
 
+  def self.secret_api_secret aid
+    aid = aid.to_s
+    return '' unless API_ID.member?(aid)
+
+    val = SECRET_API_SECRET[aid]
+    unless val
+      get_app_config aid
+      val = secret_api_secret aid
+    end
+    @@api_id = aid
+    val
+  end
+
+
+  def self.perform_mass_mailing msg, first_n = nil, start_from = nil
+
+    total_start = Time.now
+    offset = start_from || 0
+    page_size = 40_000
+
+    processed = 0
+    actual_sent = 0
+    total_count = 0
+
+    shard_start = Time.now
+    loop do
+      break unless !first_n || (first_n && processed <= first_n)
+
+#      ids = VkUser.where(:is_app_user => 1).only(:_id).asc(:_id).skip(offset).limit(page_size).map(&:id)
+      ids = VkUser.only(:_id).asc(:_id).skip(offset).limit(page_size).map(&:id)
+
+      break unless ids.length > 0
+      total_count += ids.length
+
+      chunk_length = 100
+
+      (ids.length.to_f / chunk_length).ceil.times do |chunk_num|
+        part = ids.slice(chunk_num * chunk_length, chunk_length)
+
+        actual_sent_arr = MailruApi.send_notifications(msg, part)
+        QUEUE[UPDATE_APP_USER_QUEUE] = actual_sent_arr
+        actual_sent += actual_sent_arr.length
+        processed += part.length
+
+        elapsed = Time.now - total_start
+        rate = (processed == 0 || elapsed == 0) ? 0 : processed / elapsed
+        rate2 = (processed == 0 || elapsed == 0) ? 0 : actual_sent / elapsed
+
+        print "\rMessage is sent to (\#{actual_sent} | \#{processed})  of \#{total_count}, time elapsed: \#{elapsed.to_i} secs, rate: \#{rate2.to_i} and  \#{rate.to_i} ups"
+        STDOUT.flush
+#          sleep(0.1)
+      end
+
+      offset += page_size
+
+    end
+    puts "\nTime taken: \#{Time.now - shard_start}, total: \#{Time.now - total_start}"
+    puts ""
+
+  end
+
+  def self.send_notifications msg, *vk_ids
+    msg = msg.gsub("\"", "").gsub("'", '')
+    processed = []
+    chunk_length = 100
+
+    vk_ids = vk_ids.flatten
+
+    (vk_ids.length.to_f / chunk_length).ceil.times do |chunk_num|
+      part = vk_ids.slice(chunk_num * chunk_length, chunk_length)
+      reply = send_secure_request('notifications.send', :uids => part.join(','), :text => msg)
+      response = reply
+      if response
+        processed = response
+      else
+        puts reply.inspect
+        break
+      end
+    end
+
+    processed
+  end
+
+
+  def self.send_secure_request method_name, additional_params = {}
+    aid = @@api_id || API_ID.last
+    parms = {:app_id => aid,
+             :method => method_name,
+            :secure => 1,
+             :format => 'json'}.merge(additional_params)
+
+    parms[:sig] = get_signature(aid, parms)
+    url = 'http://www.appsmail.ru/platform/api'
+    res = JSON.parse(Net::HTTP.post_form(URI.parse(url), parms.stringify_keys).body)
+
+    if res.is_a?(Hash) && res['error']
+      begin
+        error_log = File.new 'log/mm_api_errors.log', 'a'
+        error_log.puts "Calling method \#{method_name} with params \#{parms.inspect}, got result: \#{res.inspect}"
+      ensure
+        error_log.close
+      end
+    end
+
+    return res
+  end
+
+  def self.get_app_config aid
+    aid = aid.to_s
+
+    Rails.logger.warn "Getting app config for app\#{aid}"
+    stats_url = "http://counter.42bytes.ru/flash/get_apps?api_id=\#{aid}&access_token=Fz4myLSP27x6i5n"
+    data = JSON.parse(Net::HTTP.get URI.parse(stats_url))
+
+    Rails.logger.warn "Got: \#{data.inspect}"
+    app = data['apps'][aid]
+
+    API_SECRET[aid] = app['private_key']
+    SECRET_API_SECRET[aid] = app['secret_key']
+  end
+
+  def self.get_signature aid, parameters = {}
+    str = ""
+    parameters.stringify_keys.sort.each do |k, v|
+      str << "\#{k}=\#{v}"
+    end
+    str << secret_api_secret(aid)
+
+    Digest::MD5.hexdigest(str)
+  end
+
+end
+
+MMAPI
+
+
+route <<-RT
+resources :mm do
+  collection do
+    post  :send_friends
+  end
+end
 RT
 

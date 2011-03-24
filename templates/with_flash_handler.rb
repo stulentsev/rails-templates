@@ -1,3 +1,6 @@
+
+signature_salt = Digest::MD5.hexdigest(rand().to_s)
+
 file 'app/controllers/flash_base_controller.rb', <<-FLASH
 class FlashBaseController < ApplicationController
 
@@ -91,7 +94,7 @@ class FlashBaseController < ApplicationController
     sig_params.delete(:action)
     sig_params.delete(:id)
 
-    test_str = "salty salt: f8fARyZjNv3Io1l8" + sig_params[:viewer_id].dup.to_s
+    test_str = "#{signature_salt}" + sig_params[:viewer_id].dup.to_s
     sig_params.stringify_keys.sort.each do |k, v|
       test_str << "\#{k}=\#{v}"
     end
