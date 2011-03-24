@@ -419,7 +419,6 @@ class VkApi
   end
 
   def self.send_sms msg, vk_id
-    msg = msg.gsub("\"", "").gsub("'", '')
     response = send_secure_request(SEND_SMS_NOTIFICATION, :uid => vk_id, :message => msg)['response']
 
     response
