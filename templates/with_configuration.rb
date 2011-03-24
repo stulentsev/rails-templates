@@ -13,7 +13,7 @@ require 'lib/utils.rb'
 
 #REQUEST_CACHE = []
 #50.times do |num|
-#  REQUEST_CACHE << MemCache.new("local_starling_server:#{(16000 + num).to_s}")
+#  REQUEST_CACHE << MemCache.new("local_starling_server:\#{(16000 + num).to_s}")
 #end
 ENV
 
@@ -31,7 +31,7 @@ require "active_resource/railtie"
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module Pravdorub
+module #{@app_name.camelize}
   class Application < Rails::Application
     config.generators do |g|
       g.orm             :mongoid
