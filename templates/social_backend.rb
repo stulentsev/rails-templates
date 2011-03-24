@@ -11,6 +11,7 @@ def green(text)
 end
 
 def download_file from, to
+  puts "downloading file from '#{from}' to '#{to}'"
   write_out = open(to, 'wb')
   write_out.write(open(from).read)
   write_out.close
@@ -50,6 +51,8 @@ apply "https://github.com/stulentsev/rails-templates/raw/master/templates/newrel
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_flash_handler.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_dashboard.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_configuration.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_styles.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_javascripts.rb"
 
 run 'bundle install'
 

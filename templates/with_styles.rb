@@ -219,6 +219,7 @@ ul.hmenu li {
 CSS
 
 ['header_divider.gif', 'header_yellow.gif'].each do |img|
+
   download_file "https://github.com/stulentsev/rails-templates/raw/master/assets/#{img}", "public/images/#{img}"
 end
 

@@ -43,8 +43,61 @@ module #{@app_name.camelize}
 
     config.filter_parameters += [:password, :password_confirmation]
 
-    config.action_view.javascript_expansions[:defaults] = ['jquery.1.4.2.min', 'jquery-ui-1.8.4.min', 'jquery-ujs/src/rails']
+    config.action_view.javascript_expansions[:defaults] = ['jquery.min', 'jquery-ui.min', 'jquery-ujs/src/rails']
   end
 end
-
 APP
+
+file 'app/views/layouts/application.html.erb', <<-ERB
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ror</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+
+<div id='container'>
+
+  <div id='pageLayout'>
+    <div id="pageHeader">
+      <h1 id="home"><a href="/">#{@app_name}</a></h1>
+
+
+      <div class="headNav" id="topNav">
+        <div></div>
+        <% if current_user %>
+            <%= link_to('Logout', destroy_user_session_path) %>
+            <div><%= current_user.name %> </div>
+        <% end %>
+      </div>
+    </div>
+    <div id='left_sidebar'>
+
+      <ul id='nav'>
+        <li><%= link_to "Menu item 1", '#' %></li>
+        <li><%= link_to "Menu item 2", '#' %></li>
+        <li><%= link_to "Menu item 3", '#' %></li>
+        <li><%= link_to "Menu item 4", '#' %></li>
+      </ul>
+    </div>
+    <div id='pageBody'>
+      <div style="color: green"><%= notice %></div>
+
+      <div style="color: red"><%= alert %></div>
+
+      <%= yield %>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
+
+ERB
