@@ -4,7 +4,7 @@ staging_app_id = ask("What's your Mailru testing APP ID (press ENTER to skip)?  
 
 apps = staging_app_id.empty? ? [prod_app_id] : [prod_app_id, staging_app_id]
 
-if mm_app_id.length > 0
+if prod_app_id.length > 0
 
   download_file 'http://connect.mail.ru/receiver.html', 'public/receiver.html'
 
