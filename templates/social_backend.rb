@@ -59,5 +59,7 @@ run 'bundle install'
 generate 'devise:install'
 generate 'devise User'
 
+generate 'jquery:install'
+
 
 git :add => ".", :commit => "-m 'initial commit'"
