@@ -43,6 +43,7 @@ gem 'rails', '3.0.5'
 
 gem 'bson_ext'
 gem 'mongoid', '2.0.0.rc.8'
+#gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'devise'
 
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/heartbeatable.rb"
@@ -56,8 +57,36 @@ apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_j
 
 run 'bundle install'
 
+generate 'scaffold User name:string email:string'
+
 generate 'devise:install'
 generate 'devise User'
+
+file 'app/models/user.rb', <<-USER
+class User
+  include Mongoid::Document
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  devise :database_authenticatable,# :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  field :name
+  field :roles, :type => Array
+  validates_presence_of :name
+  validates_uniqueness_of :email, :case_sensitive => false
+  attr_accessible :name, :email, :password, :password_confirmation
+
+
+  def role? rol
+    rr = roles || []
+
+    rr.member?(rol.to_s)
+  end
+end
+USER
+
+route "resources :users, :only => [:show,:index]"
+
 
 generate 'jquery:install'
 

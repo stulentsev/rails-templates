@@ -10,7 +10,7 @@ class PulseController < ActionController::Base
   def pulse
     begin
       # just get some small object from the DB
-      User.first
+      Pulse.first
       render :text => "<html><body>OK  \#{Time.now.utc.to_s(:db)}</body></html>"
     rescue Exception => ex
       render :text => '<html><body>ERROR</body></html>', :status => :internal_server_error
@@ -24,3 +24,9 @@ class PulseController < ActionController::Base
   end
 end
 PULSE
+
+file 'app/models/pulse.rb', <<-MODEL
+class Pulse
+  include Mongoid::Document
+end
+MODEL
