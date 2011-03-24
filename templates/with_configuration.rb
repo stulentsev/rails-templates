@@ -43,7 +43,7 @@ module #{@app_name.camelize}
 
     config.filter_parameters += [:password, :password_confirmation]
 
-    config.action_view.javascript_expansions[:defaults] = ['jquery.min', 'jquery-ui.min', 'jquery-ujs/src/rails']
+    config.action_view.javascript_expansions[:defaults] = ['jquery.min', 'jquery-ui.min', 'rails']
   end
 end
 APP
