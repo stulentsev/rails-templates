@@ -30,6 +30,18 @@ echo "source 'http://rubygems.org'
 " > Gemfile
 FFF
 
+file 'public/crossdomain.xml', <<-CD
+<?xml version="1.0"?>
+<!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
+
+<cross-domain-policy>
+	<site-control permitted-cross-domain-policies="master-only"/>
+	<allow-access-from domain="*"/>
+	<allow-http-request-headers-from domain="*" headers="SOAPAction"/>
+</cross-domain-policy>
+CD
+
+
 
 new_ignores = <<-END
 config/database.yml
@@ -45,20 +57,22 @@ gem 'bson_ext'
 gem 'mongoid', '2.0.0.rc.8'
 #gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'devise'
+gem 'jquery-rails', '>= 0.2.6'
 
-apply "https://github.com/stulentsev/rails-templates/raw/master/templates/heartbeatable.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_heartbeat.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"
-apply "https://github.com/stulentsev/rails-templates/raw/master/templates/newrelicable.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_newrelic.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_flash_handler.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_dashboard.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_configuration.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_styles.rb"
-apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_javascripts.rb"
+apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mailru.rb"
 
 run 'bundle install'
 
 generate 'scaffold User name:string email:string'
 
+route "resources :users, :only => [:show,:index]"
 generate 'devise:install'
 generate 'devise User'
 
@@ -85,10 +99,8 @@ class User
 end
 USER
 
-route "resources :users, :only => [:show,:index]"
 
-
-generate 'jquery:install'
+generate 'jquery:install --ui'
 
 
 git :add => ".", :commit => "-m 'initial commit'"

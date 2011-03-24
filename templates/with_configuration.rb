@@ -9,6 +9,8 @@ require 'lib/vk_api.rb'
 #require 'lib/mailru_api.rb'
 require 'lib/utils.rb'
 
+SN_API = VkApi
+
 #QUEUE = MemCache.new('local_starling_server:22122')
 
 #REQUEST_CACHE = []
