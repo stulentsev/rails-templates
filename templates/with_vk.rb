@@ -4,6 +4,8 @@ staging_app_id = ask("What's your VK testing APP ID (press ENTER to skip)")
 apps = staging_app_id.empty? ? [prod_app_id] : [prod_app_id, staging_app_id]
 
 lib 'vk_api.rb', <<-VKAPI
+require 'net/http'
+
 class VkApi
 
   API_ID = #{apps.inspect}

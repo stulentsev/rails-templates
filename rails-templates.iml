@@ -21,6 +21,12 @@
     </requirement>
     <requirement>
       <requirement>
+        <dependency name="json" version="0" bound="GREATER_OR_EQUAL" git="false" path="false" doRequire="true" />
+      </requirement>
+      <source from="templates/social_backend.rb" />
+    </requirement>
+    <requirement>
+      <requirement>
         <dependency name="mongoid" version="2.0.0.rc.8" bound="EQUAL" git="false" path="false" doRequire="true" />
       </requirement>
       <source from="templates/social_backend.rb" />

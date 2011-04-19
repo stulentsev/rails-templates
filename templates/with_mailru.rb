@@ -9,6 +9,8 @@ if prod_app_id.length > 0
   download_file 'http://connect.mail.ru/receiver.html', 'public/receiver.html'
 
   file 'app/controllers/mm_controller.rb', <<-MMCONTROLLER
+  require 'net/http'
+
   class MmController < FlashBaseController
     skip_before_filter :authenticate
     before_filter :authenticate, :except => [:wrapper, :payment]

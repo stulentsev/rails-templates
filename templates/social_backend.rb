@@ -52,12 +52,14 @@ file 'app/views/layouts/void.erb', '<%= yield %>'
 
 gem 'rails', '3.0.5'
 
+gem 'json'
 gem 'bson_ext'
 gem 'mongoid', '2.0.0.rc.8'
 #gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'devise'
 gem 'jquery-rails', '>= 0.2.6'
 gem 'starling'
+gem 'SystemTimer'
 
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_heartbeat.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"

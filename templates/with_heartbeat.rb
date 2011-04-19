@@ -1,6 +1,6 @@
 route "match 'heartbeat' => 'pulse#pulse'"
 
-file 'app/controllers/pulse_controller', <<-PULSE
+file 'app/controllers/pulse_controller.rb', <<-PULSE
 class PulseController < ActionController::Base
   session :off
 
