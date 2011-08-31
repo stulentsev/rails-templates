@@ -6,20 +6,20 @@ run "echo '#{new_ignores}' >> .gitignore"
 
 
 file 'config/mongoid.yml', <<-END
-defaults: &defaults
-  host: localhost
-
 development:
-  <<: *defaults
+  host: localhost
+  port: 27017
   database: #{@app_name}_development
 
 test:
-  <<: *defaults
+  host: localhost
+  port: 27017
   database: #{@app_name}_test
 
 # set these environment variables on your prod server
 production:
-  <<: *defaults
+  host: localhost
+  port: 27017
   database: #{@app_name}_production
 END
 
