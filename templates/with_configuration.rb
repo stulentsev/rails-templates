@@ -14,9 +14,9 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 #{@app_name.camelize}::Application.initialize!
 
-require 'lib/vk_api.rb'
-#require 'lib/mailru_api.rb'
-require 'lib/utils.rb'
+require './lib/vk_api.rb'
+#require './lib/mailru_api.rb'
+require './lib/utils.rb'
 
 SN_API = VkApi
 
