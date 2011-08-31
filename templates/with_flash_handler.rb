@@ -216,6 +216,8 @@ puts red("Don't forget to check identity of VkUser")
 
 
 lib 'utils.rb', <<-UTILS
+# encoding: utf-8
+
 def convert_db_id str
   #4d50 b64b 9b3b 491e 7300 0011
   if str.is_a?(String) && str.length == 24
