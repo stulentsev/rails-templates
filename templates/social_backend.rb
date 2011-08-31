@@ -17,6 +17,10 @@ def download_file from, to
   write_out.close
 end
 
+['images', 'stylesheets', 'javascripts'].each do |public_folder|
+	Dir.mkdir "public/#{public_folder}" unless File.exists? "public/#{public_folder}"
+end
+
 git :init
 
 run "echo 'TODO add readme content' > README"
