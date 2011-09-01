@@ -29,7 +29,7 @@ file 'app/assets/stylesheets/layout.css', <<-CSS
 }
 
 .headNav a, .headNav div {
-    background: url("../images/header_divider.gif") no-repeat scroll left top transparent;
+    background: url("/assets/header_divider.gif") no-repeat scroll left top transparent;
     color: #DAE1E8;
     display: block;
     float: right;
@@ -86,7 +86,7 @@ a, span.link, span.linkover {
 
 #header {
     background-color: #EEE5B8;
-    background-image: url("../images/header_yellow.gif");
+    background-image: url("/assets/header_yellow.gif");
     background-position: left top;
     background-repeat: repeat-x;
     border-bottom: 1px solid #D7CF9E;

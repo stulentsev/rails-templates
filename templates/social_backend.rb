@@ -66,8 +66,11 @@ gem 'bson_ext'
 gem 'mongoid'
 #gem 'mongoid', :git => 'https://github.com/mongoid/mongoid.git'
 gem 'devise'
-gem 'jquery-rails', '>= 0.2.6'
+gem "sass-rails"
+gem "coffee-rails"
+gem "uglifier"
 
+gem 'jquery-rails'
 
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_heartbeat.rb"
 apply "https://github.com/stulentsev/rails-templates/raw/master/templates/with_mongoid.rb"
