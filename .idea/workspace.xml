@@ -16,8 +16,7 @@
   <component name="ChangeListManager">
     <list default="true" id="39833d02-005d-4c63-bd08-8bde2d054f35" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rails-templates.iml" afterPath="$PROJECT_DIR$/rails-templates.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/with_newrelic.rb" afterPath="$PROJECT_DIR$/templates/with_newrelic.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/with_configuration.rb" afterPath="$PROJECT_DIR$/templates/with_configuration.rb" />
     </list>
     <ignored path="rails-templates.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,16 +78,16 @@
       <file leaf-file-name="with_vk.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/with_vk.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="211" column="0" selection-start="6133" selection-end="6133" vertical-scroll-proportion="0.0">
+            <state line="214" column="0" selection-start="5788" selection-end="6227" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="with_configuration.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="with_configuration.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/with_configuration.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="-22.461538">
+            <state line="8" column="0" selection-start="204" selection-end="204" vertical-scroll-proportion="0.19543974">
               <folding />
             </state>
           </provider>
@@ -97,16 +96,16 @@
       <file leaf-file-name="social_backend.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/social_backend.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="0" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0">
+            <state line="27" column="43" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="with_newrelic.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="with_newrelic.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/with_newrelic.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="16" selection-start="5465" selection-end="5465" vertical-scroll-proportion="0.328125">
+            <state line="133" column="111" selection-start="5753" selection-end="5753" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -147,9 +146,10 @@
         <option value="$PROJECT_DIR$/templates/with_flash_handler.rb" />
         <option value="$PROJECT_DIR$/templates/with_mongoid.rb" />
         <option value="$PROJECT_DIR$/templates/with_vk.rb" />
-        <option value="$PROJECT_DIR$/templates/with_configuration.rb" />
         <option value="$PROJECT_DIR$/templates/social_backend.rb" />
         <option value="$PROJECT_DIR$/templates/with_newrelic.rb" />
+        <option value="$PROJECT_DIR$/templates/with_mailru.rb" />
+        <option value="$PROJECT_DIR$/templates/with_configuration.rb" />
       </list>
     </option>
   </component>
@@ -435,30 +435,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/with_vk.rb">
+    <entry file="file://$PROJECT_DIR$/templates/with_newrelic.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="211" column="0" selection-start="6133" selection-end="6133" vertical-scroll-proportion="0.0">
+        <state line="133" column="111" selection-start="5753" selection-end="5753" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/with_configuration.rb">
+    <entry file="file://$PROJECT_DIR$/templates/with_mailru.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="-22.461538">
+        <state line="272" column="12" selection-start="7219" selection-end="7219" vertical-scroll-proportion="0.82701814">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/with_vk.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="0" selection-start="5788" selection-end="6227" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/social_backend.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.0">
+        <state line="27" column="43" selection-start="645" selection-end="645" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/with_newrelic.rb">
+    <entry file="file://$PROJECT_DIR$/templates/with_configuration.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="16" selection-start="5465" selection-end="5465" vertical-scroll-proportion="0.328125">
+        <state line="8" column="0" selection-start="204" selection-end="204" vertical-scroll-proportion="0.19543974">
           <folding />
         </state>
       </provider>
