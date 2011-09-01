@@ -202,18 +202,12 @@ class VkApi
   def self.get_app_config aid
     aid = aid.to_s
 
-    cache_key = "app_config_\#{aid}"
-    app = get_from_random_server cache_key
+    Rails.logger.warn "Getting app config for app\#{aid}"
+    stats_url = "http://counter.42bytes.ru/flash/get_apps?api_id=\#{aid}&access_token=Fz4myLSP27x6i5n"
+    data = JSON.parse(Net::HTTP.get URI.parse(stats_url))
 
-    unless app
-      Rails.logger.warn "Getting app config for app\#{aid}"
-      stats_url = "http://counter.42bytes.ru/flash/get_apps?api_id=\#{aid}&access_token=Fz4myLSP27x6i5n"
-      data = JSON.parse(Net::HTTP.get URI.parse(stats_url))
-
-      Rails.logger.warn "Got: \#{data.inspect}"
-      app = data['apps'][aid]
-      store_to_all_servers cache_key, app
-    end
+    Rails.logger.warn "Got: \#{data.inspect}"
+    app = data['apps'][aid]
 
     API_SECRET[aid] = app['private_key']
     SECRET_API_SECRET[aid] = app['secret_key']

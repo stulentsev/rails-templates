@@ -1,11 +1,3 @@
-num_data_caches = ask("What number of data caches do you want (default 1)? ")
-num_request_caches = ask('what number of request caches do you want (default - none)? ')
-
-num_data_caches = num_data_caches == '' ? 1 : num_data_caches.to_i
-num_request_caches = num_request_caches == '' ? 0 : num_request_caches.to_i
-
-num_data_caches = 0 if num_data_caches < 0
-num_request_caches = 0 if num_request_caches < 0
 
 file 'config/environment.rb', <<-ENV
 # Load the rails application
@@ -20,17 +12,6 @@ require './lib/utils.rb'
 
 SN_API = VkApi
 
-QUEUE = MemCache.new('local_starling_server:22122')
-
-DATA_CACHE = []
-#{num_data_caches}.times do |num|
-  DATA_CACHE << MemCache.new("local_starling_server:\#{(15000 + num).to_s}")
-end
-
-REQUEST_CACHE = []
-#{num_request_caches}.times do |num|
-  REQUEST_CACHE << MemCache.new("local_starling_server:\#{(16000 + num).to_s}")
-end
 ENV
 
 file 'config/application.rb', <<-APP
@@ -117,30 +98,3 @@ file 'app/views/layouts/application.html.erb', <<-ERB
 </html>
 
 ERB
-
-file 'jobs/start_queues_and_caches.sh', <<-JOB
-#! /bin/bash
-
-# data cache
-for i in {15000..#{15000 + num_data_caches - 1}}
-do
-   sudo memcached -d -p $i -u nobody -m 30
-done
-
-# request params cache (for anti-cheating)
-for i in {16000..#{16000 + num_request_caches - 1}}
-do
-   sudo memcached -d -p $i -u nobody -m 10
-done
-
-
-sudo starling -h local_starling_server -d -p 22122 -P /var/run/starling3.pid
-
-## new answer queues
-#for i in {30000..30029}
-#do
-#   sudo starling -h local_starling_server -d -p $i -P /var/run/starling_answer$i.pid
-#done
-
-
-JOB
