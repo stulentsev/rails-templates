@@ -61,7 +61,6 @@ file 'app/views/layouts/void.erb', '<%= yield %>'
 
 gem 'rails'
 
-gem 'memcached'
 gem 'json'
 gem 'bson_ext'
 gem 'mongoid'

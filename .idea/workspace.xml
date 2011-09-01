@@ -15,10 +15,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39833d02-005d-4c63-bd08-8bde2d054f35" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rails-templates.iml" afterPath="$PROJECT_DIR$/rails-templates.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/with_configuration.rb" afterPath="$PROJECT_DIR$/templates/with_configuration.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/with_vk.rb" afterPath="$PROJECT_DIR$/templates/with_vk.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/social_backend.rb" afterPath="$PROJECT_DIR$/templates/social_backend.rb" />
     </list>
     <ignored path="rails-templates.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,19 +83,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="with_configuration.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="with_configuration.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/with_configuration.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="0.95114005">
+            <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="-22.461538">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="social_backend.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="social_backend.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/social_backend.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="15" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.0">
+            <state line="63" column="0" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.4453125">
               <folding />
             </state>
           </provider>
@@ -137,10 +134,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/templates/with_flash_handler.rb" />
-        <option value="$PROJECT_DIR$/templates/social_backend.rb" />
         <option value="$PROJECT_DIR$/templates/with_mongoid.rb" />
         <option value="$PROJECT_DIR$/templates/with_vk.rb" />
         <option value="$PROJECT_DIR$/templates/with_configuration.rb" />
+        <option value="$PROJECT_DIR$/templates/social_backend.rb" />
       </list>
     </option>
   </component>
@@ -412,11 +409,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/social_backend.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="15" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/with_mongoid.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="0" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0">
@@ -440,7 +432,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/with_configuration.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="0.95114005">
+        <state line="100" column="0" selection-start="2162" selection-end="2162" vertical-scroll-proportion="-22.461538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/social_backend.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="1322" selection-end="1322" vertical-scroll-proportion="0.4453125">
           <folding />
         </state>
       </provider>
