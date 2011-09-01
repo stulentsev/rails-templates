@@ -1,4 +1,4 @@
-file 'public/stylesheets/layout.css', <<-CSS
+file 'app/assets/stylesheets/layout.css', <<-CSS
 .box_shadow {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
@@ -118,7 +118,7 @@ h1 {
 }
 CSS
 
-file 'public/stylesheets/applications.css', <<-CSS
+file 'app/assets/stylesheets/applications.css', <<-CSS
 #container {
     width: 100%;
     font-family: tahoma, verdana, arial, sans-serif, Lucida Sans;
@@ -220,6 +220,6 @@ CSS
 
 ['header_divider.gif', 'header_yellow.gif'].each do |img|
 
-  download_file "https://github.com/stulentsev/rails-templates/raw/master/assets/#{img}", "public/images/#{img}"
+  download_file "https://github.com/stulentsev/rails-templates/raw/master/assets/#{img}", "app/assets/images/#{img}"
 end
 

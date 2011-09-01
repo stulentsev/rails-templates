@@ -31,8 +31,6 @@ if defined?(Bundler)
   Bundler.require(:default, :assets, Rails.env)
 end
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
-
 module #{@app_name.camelize}
   class Application < Rails::Application
     config.generators do |g|
@@ -61,8 +59,8 @@ file 'app/views/layouts/application.html.erb', <<-ERB
 <html>
 <head>
   <title>Ror</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
 </head>
 <body>

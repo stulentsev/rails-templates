@@ -18,7 +18,7 @@ def download_file from, to
 end
 
 ['images', 'stylesheets', 'javascripts'].each do |public_folder|
-	Dir.mkdir "public/#{public_folder}" unless File.exists? "public/#{public_folder}"
+	Dir.mkdir "app/assets/#{public_folder}" unless File.exists? "app/assets/#{public_folder}"
 end
 
 git :init
